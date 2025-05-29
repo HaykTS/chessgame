@@ -1,0 +1,8 @@
+{
+  "name": "classic",
+  "board": "boards\\classic.png",
+  "pieces": {
+    "w": "pieces\\classic",
+    "b": "pieces\\classic"
+  }
+}
