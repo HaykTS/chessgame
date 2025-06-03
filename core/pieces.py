@@ -147,7 +147,7 @@ class King(Piece):
                 target = board.get_piece((r, c))
                 if target is None or target.color != self.color:
                     moves.append((r, c))
-        if not self.has_moved and not board.is_in_check(self.color):
+        if not self.has_moved:
             if self.can_castle_kingside(board, pos):
                 moves.append((row, 6))
             if self.can_castle_queenside(board, pos):
@@ -156,16 +156,16 @@ class King(Piece):
     def can_castle_kingside(self, board, pos):
         row = pos[0]
         rook = board.get_piece((row, 7))
-        if not isinstance(rook, Rook) or rook != self.color or rook.has_moved:
+        if not isinstance(rook, Rook) or rook.color != self.color or rook.has_moved:
             return False
         for col in [5, 6]:
-            if board.get_piece((row, col)) is not None or board.square_attacked((row, col), self.color):
+            if board.get_piece((row, col)) is not None or board.square_attacked((row, col), "b" if self.color == "w" else "b"):
                 return False
         return True
     def can_castle_queenside(self, board, pos):
         row = pos[0]
         rook = board.get_piece((row, 0))
-        if not isinstance(rook, Rook) or rook != self.color or rook.has_moved:
+        if not isinstance(rook, Rook) or rook.color != self.color or rook.has_moved:
             return False
         for col in [1, 2, 3]:
             if board.get_piece((row, col)) is not None or (col != 1 and board.square_attacked((row, col), self.color)):
