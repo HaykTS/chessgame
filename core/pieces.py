@@ -159,7 +159,7 @@ class King(Piece):
         if not isinstance(rook, Rook) or rook.color != self.color or rook.has_moved:
             return False
         for col in [5, 6]:
-            if board.get_piece((row, col)) is not None or board.square_attacked((row, col), "b" if self.color == "w" else "b"):
+            if board.get_piece((row, col)) is not None or board.square_attacked((row, col), "b" if self.color == "w" else "w"):
                 return False
         return True
     def can_castle_queenside(self, board, pos):
@@ -168,7 +168,7 @@ class King(Piece):
         if not isinstance(rook, Rook) or rook.color != self.color or rook.has_moved:
             return False
         for col in [1, 2, 3]:
-            if board.get_piece((row, col)) is not None or (col != 1 and board.square_attacked((row, col), self.color)):
+            if board.get_piece((row, col)) is not None or (col != 1 and board.square_attacked((row, col), "b" if self.color == "w" else "w")):
                 return False
         return True
 
